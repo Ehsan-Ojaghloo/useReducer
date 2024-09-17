@@ -1,27 +1,25 @@
 import React, { useReducer } from 'react'
+import "./App.scss"
+
+function operator(state, action) {
+  switch (action.type) {
+    case "num1":
+      return state = true;
+    case "num2":
+      return state = false;
+  }
+}
 
 function App() {
 
-  function reducer(state, action) {
-    switch (action) {
-      case 'increase':
-        return state + 1;
-      case 'decrease':
-        return state - 1;
-      case 'reset':
-        return (state = 0)
-    }
-  }
-
-  const [count, dispatch] = useReducer(reducer, 0);
+  const [animated, dispatch] = useReducer(operator, false)
 
   return (
-    <div>
-      <h1>Hello</h1>
-      <h2>useReducer</h2>
-      <button onClick={() => dispatch('increase')}>+</button>
-      <span onClick={() => dispatch('reset')}>count is {count}</span>
-      <button onClick={() => dispatch('decrease')}>-</button>
+    <div className='container'>
+      <div className="btn-con">
+        <button className={animated ? "animation1" : "animation2"} onClick={() => { dispatch({ type: "num1" }) }}>❌</button>
+        <button className={animated ? "animation2" : "animation3"} onClick={() => { dispatch({ type: "num2" }) }}>✅</button>
+      </div>
     </div>
   )
 }
